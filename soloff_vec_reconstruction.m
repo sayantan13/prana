@@ -6,7 +6,6 @@ function [scaling]=soloff_vec_reconstruction(diroutlist,caldata,pulsesep)
 % Meas. Sci. Tech., 1997.
 % Inputs:
 t=1/pulsesep;
-
 dir_struct1= dir(fullfile(diroutlist.soloff2dcam1,['*.' 'mat']));
 flname1={dir_struct1.name}';
 dir_struct2= dir(fullfile(diroutlist.soloff2dcam2,['*.' 'mat']));
@@ -34,7 +33,6 @@ for j=1:nof
         Ygrid1=dewarp_grid.Ygrid1;
         Xgrid2=dewarp_grid.Xgrid2;
         Ygrid2=dewarp_grid.Ygrid2;
-        %keyboard;
     elseif j>1 && ~strcmp(foutnamelist{j}{2}(1),foutnamelist{j-1}{2}(1))
         [~,dewarp_grid,scaling]=imagedewarp(caldata,'Soloff',imagelist,vectorlist{j});
         
@@ -45,7 +43,6 @@ for j=1:nof
         Ygrid1=dewarp_grid.Ygrid1;
         Xgrid2=dewarp_grid.Xgrid2;
         Ygrid2=dewarp_grid.Ygrid2;
-        %keyboard;
         
     end
     
@@ -63,51 +60,17 @@ for j=1:nof
     u2=vecfr2.U(:,:,1); %pixels displacement?
     v2=vecfr2.V(:,:,1);
     clear vecfr2;
-    %keyboard;
+    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Perform the interpolation in the image planes
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%       figure;quiver(x1,y1,u1,v1);
-%       figure;quiver(x2,y2,u2,v2);
-
-    %keyboard;
-
-    u1(abs(u1)>20)=0;
-    v1(abs(v1)>20)=0;
-    u2(abs(u2)>20)=0;
-    v2(abs(v2)>20)=0;
-
-    %keyboard;
-    u1=medfilt2(u1,[3,3]);
-    v1=medfilt2(v1,[3,3]);
-    u2=medfilt2(u2,[3,3]);
-    v2=medfilt2(v2,[3,3]);
-    
-    %keyboard;
-    
+    %     keyboard
     U1 = interp2(x1,y1,u1,Xgrid1,Ygrid1,'cubic',0);
     V1 = interp2(x1,y1,v1,Xgrid1,Ygrid1,'cubic',0);
     U2 = interp2(x2,y2,u2,Xgrid2,Ygrid2,'cubic',0);
     V2 = interp2(x2,y2,v2,Xgrid2,Ygrid2,'cubic',0);
     [rows,cols]=size(U1);
     
-%     figure;quiver(Xgrid1,Ygrid1,U1,V1);
-%     figure;quiver(Xgrid2,Ygrid2,U2,V2);
-    %keyboard;
-    vel1=sqrt(U1.^2+V1.^2);
-    vel2=sqrt(U2.^2+V2.^2);
-    p1=vel1;
-%     p1(p1~=0)=1;
-    p1(p1>1)=1;
-%figure;imagesc(p1);
-    p2=vel2;
-%     p2(p2~=0)=1;
-    p2(p2>1)=1;
-    prodvec=p1.*p2;
-    
-    %prodvec(prodvec~=1)=0;
-    
-    %keyboard;
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Compute gradients of calibration functions
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -179,10 +142,7 @@ for j=1:nof
     V=v.*(t/1000);%/data.pulsesep;%*1000;     % pulsesep is in microsec
     W=w.*(t/1000);%/data.pulsesep;%*1000;
     
-    U=U.*prodvec;
-    V=V.*prodvec;
-    W=W.*prodvec;
-    %keyboard;
+    
     % Change from mm to m for SI output.
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     X=xgrid./1000;
