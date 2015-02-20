@@ -5,10 +5,6 @@ imClass = 'double';
 %convert input parameters
 im1=cast(im1,imClass);
 im2=cast(im2,imClass);
-
-im1=im1-min(im1(:));
-im2=im2-min(im2(:));
-
 L = size(im1);
 
 %convert to gridpoint list

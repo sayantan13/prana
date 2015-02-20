@@ -64,7 +64,7 @@ job1.imcstep='0';
 %to 1 everytime to get pixel units.  I can't find anywhere that they were
 %changed from their defaults either.  Should we force them to 1 here to
 %make sure someone doesn't load a job where they've been manually altered?
-%keyboard;
+
 
 fprintf('Calculating Disparity.\n')
 pranaPIVcode(job1);
@@ -244,7 +244,7 @@ fprintf('gamma = %g deg; tx = %g mm; ty = %g mm.\n',gamma*180/pi,tx,ty)
 %build the analytical transform matrix
 Rotz = [cos(gamma/2) -sin(gamma/2) 0 ; sin(gamma/2) cos(gamma/2) 0; 0 0 1];
 %%
-% keyboard
+%keyboard
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
