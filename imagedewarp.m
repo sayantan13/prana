@@ -230,27 +230,10 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % make object coordinate grid
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% xlow=max([left1xy(1,:) left2xy(1,:)]);
-% xhigh=min([right1xy(1,:) right2xy(1,:)]);
-% ylow=max([bottom1xy(2,:) bottom2xy(2,:)]);
-% yhigh=min([top1xy(2,:) top2xy(2,:)]);
-
-% % xlow=-16.75;xhigh=26.5;
-% % % ylow=-23.5;yhigh=36;%53;
-% % ylow=-28.6;yhigh=33.3;%53;
-
-%Cam0Cam1
-xlow=-17;xhigh=27;
-ylow=-26;yhigh=40;
-
-%Cam2Cam3
-% xlow=-15.3;xhigh=24.5;
-% ylow=-27;yhigh=46;
-
-
-% ylow=-23.5;yhigh=36;%53;
-%ylow=-31;yhigh=35;
-
+xlow=max([left1xy(1,:) left2xy(1,:)]);
+xhigh=min([right1xy(1,:) right2xy(1,:)]);
+ylow=max([bottom1xy(2,:) bottom2xy(2,:)]);
+yhigh=min([top1xy(2,:) top2xy(2,:)]);
 
 %set the number of points in dewarped image to the size of Camera 1's
 %original undewarped image.
@@ -286,7 +269,7 @@ if overplots == 1
     %         axis([-200 100 -150 250])
     drawnow
 end
- %keyboard;
+%keyboard;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Compute this grid in the IMAGE (object) plane to interpolate values
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

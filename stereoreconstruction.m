@@ -31,7 +31,6 @@ planarjob.wrmag = '1';
 for j = 1:length(rectype)
     %Planar Field Calculation
     if strcmp(rectype{j},'Willert')
-        
         fprintf('Processing for Geometric Reconstruction... \n');
         %Dewarp the camera images
         [dewarpdirlist,dewarp_grid,wil_scaling]=imagedewarp(caldata,'Willert',planarjob);
@@ -44,7 +43,6 @@ for j = 1:length(rectype)
         job1.imbase=planarjob.imbase;
         job1.imdirec2=dewarpdirlist.dewarpdir1;
         job1.imbase2=planarjob.imbase;
-        %job1.staticmaskname = fullfile(planarjob.imdirec, 'staticmask.tif');
         % By creating a variable "cam1dir" I know only have to update one
         % location if I want to change the form of this directory.  The
         % previous way it was written I would have to update multiple locations
@@ -65,7 +63,6 @@ for j = 1:length(rectype)
         job1.imbase=planarjob.imbase2;
         job1.imdirec2=dewarpdirlist.dewarpdir2;
         job1.imbase2=planarjob.imbase2;
-        %job1.staticmaskname = fullfile(planarjob.imdirec2, 'staticmask.tif');
         
         cam2dir = fullfile(job1.outdirec,rectype{j},['Camera',num2str(caldata.camnumber(2)),filesep]);
         if ~exist(cam2dir,'dir')
@@ -92,7 +89,6 @@ for j = 1:length(rectype)
         
         
     elseif strcmp(rectype{j},'Soloff')
-                
         fprintf('Processing for Genaralized Reconstruction... \n');
         %2D processing for camera1
         job1=planarjob;
